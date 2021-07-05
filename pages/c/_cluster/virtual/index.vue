@@ -12,6 +12,9 @@ import { REASON } from '@/config/table-headers';
 import { EVENT, METRIC, NODE, HCI } from '@/config/types';
 import SimpleBox from '@/components/SimpleBox';
 import ResourceGauge from '@/components/ResourceGauge';
+import Tabbed from '@/components/Tabbed';
+import Tab from '@/components/Tabbed/Tab';
+import DashboardMetrics from '@/components/DashboardMetrics';
 import HardwareResourceGauge from './HardwareResourceGauge';
 import Upgrade from './Upgrade';
 
@@ -41,6 +44,9 @@ const RESOURCES = [{
   visitResource: 'host'
 }, { type: HCI.VM }, { type: HCI.NETWORK_ATTACHMENT }, { type: HCI.IMAGE }, { type: HCI.DATA_VOLUME }];
 
+const CLUSTER_METRICS_DETAIL_URL = '/api/v1/namespaces/cattle-monitoring-system/services/http:rancher-monitoring-grafana:80/proxy/d/rancher-cluster-nodes-1/rancher-cluster-nodes?orgId=1';
+const CLUSTER_METRICS_SUMMARY_URL = '/api/v1/namespaces/cattle-monitoring-system/services/http:rancher-monitoring-grafana:80/proxy/d/rancher-cluster-1/rancher-cluster?orgId=1';
+
 export default {
   components: {
     Loading,
@@ -49,6 +55,9 @@ export default {
     SimpleBox,
     SortableTable,
     Upgrade,
+    Tabbed,
+    Tab,
+    DashboardMetrics,
   },
 
   async fetch() {
@@ -57,6 +66,7 @@ export default {
       nodes:       this.fetchClusterResources(NODE),
       events:      this.fetchClusterResources(EVENT),
       metricNodes: this.fetchClusterResources(METRIC.NODE),
+      poi:         this.$axios('/api/v1/namespaces/harvester-monitoring/services/monitoring-prometheus:9090/proxy/api/v1/query?query=time()')
     };
 
     const res = await allSettled(hash);
@@ -106,7 +116,9 @@ export default {
       nodes:             [],
       metricNodes:       [],
       vms:               [],
-      currentCluster:    'local'
+      currentCluster:    'local',
+      CLUSTER_METRICS_DETAIL_URL,
+      CLUSTER_METRICS_SUMMARY_URL,
     };
   },
 
@@ -380,6 +392,19 @@ export default {
         </template>
       </SortableTable>
     </SimpleBox>
+
+    <Tabbed class="mt-30">
+      <Tab name="metrics" :label="t('harvester.homePage.sections.metrics.label')" :weight="1">
+        <template #default="props">
+          <DashboardMetrics
+            v-if="props.active"
+            :detail-url="CLUSTER_METRICS_DETAIL_URL"
+            :summary-url="CLUSTER_METRICS_SUMMARY_URL"
+            graph-height="825px"
+          />
+        </template>
+      </Tab>
+    </Tabbed>
   </section>
 </template>
 

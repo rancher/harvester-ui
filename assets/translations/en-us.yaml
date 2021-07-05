@@ -4439,6 +4439,8 @@ harvester:
     sections:
       events:
         label: Events
+      metrics:
+        label: Monitoring Metrics
   upgradePage:
     upgradeApp: Upgrade Software
     upgrade: Upgrade
