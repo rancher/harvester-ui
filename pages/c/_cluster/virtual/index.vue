@@ -44,8 +44,8 @@ const RESOURCES = [{
   visitResource: 'host'
 }, { type: HCI.VM }, { type: HCI.NETWORK_ATTACHMENT }, { type: HCI.IMAGE }, { type: HCI.DATA_VOLUME }];
 
-const CLUSTER_METRICS_DETAIL_URL = '/api/v1/namespaces/cattle-monitoring-system/services/http:rancher-monitoring-grafana:80/proxy/d/rancher-cluster-nodes-1/rancher-cluster-nodes?orgId=1';
-const CLUSTER_METRICS_SUMMARY_URL = '/api/v1/namespaces/cattle-monitoring-system/services/http:rancher-monitoring-grafana:80/proxy/d/rancher-cluster-1/rancher-cluster?orgId=1';
+const CLUSTER_METRICS_DETAIL_URL = '/api/v1/namespaces/harvester-monitoring/services/http:access-grafana:80/proxy/d/HV_1uZwWk/vm-info-detail?orgId=1';
+const CLUSTER_METRICS_SUMMARY_URL = '/api/v1/namespaces/harvester-monitoring/services/http:access-grafana:80/proxy/d/V3EJMiinz/vm-dashboard?orgId=1';
 
 export default {
   components: {
@@ -66,7 +66,6 @@ export default {
       nodes:       this.fetchClusterResources(NODE),
       events:      this.fetchClusterResources(EVENT),
       metricNodes: this.fetchClusterResources(METRIC.NODE),
-      poi:         this.$axios('/api/v1/namespaces/harvester-monitoring/services/monitoring-prometheus:9090/proxy/api/v1/query?query=time()')
     };
 
     const res = await allSettled(hash);
