@@ -4014,6 +4014,7 @@ harvester:
         monitor: 监控数据
         keypairs: 公共密钥
         cloudConfig: Cloud 配置
+        metrics: 指标
       console:
         down: 请启动虚拟机以访问控制台.
     migrationModal:
