@@ -15,8 +15,8 @@ import OverviewCloudConfigs from './tabs/details/cloud-configs';
 import Migration from './tabs/migration';
 import Events from './tabs/events/';
 
-const CLUSTER_METRICS_DETAIL_URL = '/api/v1/namespaces/harvester-monitoring/services/http:monitoring--grafana:80/proxy/d/HV_1uZwWk/vm-info-detail?orgId=1';
-const CLUSTER_METRICS_SUMMARY_URL = '/api/v1/namespaces/harvester-monitoring/services/http:monitoring--grafana:80/proxy/d/V3EJMiinz/vm-dashboard?orgId=1';
+const CLUSTER_METRICS_DETAIL_URL = '/api/v1/namespaces/harvester-monitoring/services/http:monitoring-grafana:80/proxy/d/HV_1uZwWk/vm-info-detail?orgId=1';
+const CLUSTER_METRICS_SUMMARY_URL = '/api/v1/namespaces/harvester-monitoring/services/http:monitoring-grafana:80/proxy/d/V3EJMiinz/vm-dashboard?orgId=1';
 
 export default {
   name: 'VMIDetailsPage',
