@@ -6,7 +6,7 @@ import CreateEditView from '@/mixins/create-edit-view';
 import BackupModal from '@/list/kubevirt.io.virtualmachine/backupModal';
 import RestoreModal from '@/list/kubevirt.io.virtualmachine/restoreModal';
 import MigrationModal from '@/list/kubevirt.io.virtualmachine/MigrationModal';
-import DashboardMetrics from '@/components/DashboardMetrics';
+import HarvesterMetrics from '@/components/HarvesterMetrics';
 import OverviewBasics from './tabs/details/basics';
 import OverviewDisks from './tabs/details/disks';
 import OverviewNetworks from './tabs/details/networks';
@@ -34,7 +34,7 @@ export default {
     BackupModal,
     RestoreModal,
     MigrationModal,
-    DashboardMetrics,
+    HarvesterMetrics,
   },
 
   mixins: [CreateEditView],
@@ -139,12 +139,12 @@ export default {
 
       <Tab :label="t('harvester.vmPage.detail.tabs.metrics')" name="vm-metrics" :weight="2.5">
         <template #default="props">
-          <DashboardMetrics
+          <HarvesterMetrics
             v-if="props.active"
             :detail-url="CLUSTER_METRICS_DETAIL_URL"
             :summary-url="CLUSTER_METRICS_SUMMARY_URL"
             graph-height="550px"
-            :hasSumarryAndDetail="false"
+            :has-sumarry-and-detail="false"
             :vars="graphVars"
           />
         </template>

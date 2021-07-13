@@ -12,9 +12,7 @@ import { REASON } from '@/config/table-headers';
 import { EVENT, METRIC, NODE, HCI } from '@/config/types';
 import SimpleBox from '@/components/SimpleBox';
 import ResourceGauge from '@/components/ResourceGauge';
-import Tabbed from '@/components/Tabbed';
-import Tab from '@/components/Tabbed/Tab';
-import DashboardMetrics from '@/components/DashboardMetrics';
+import HarvesterMetrics from '@/components/HarvesterMetrics';
 import HardwareResourceGauge from './HardwareResourceGauge';
 import Upgrade from './Upgrade';
 
@@ -55,9 +53,7 @@ export default {
     SimpleBox,
     SortableTable,
     Upgrade,
-    Tabbed,
-    Tab,
-    DashboardMetrics,
+    HarvesterMetrics,
   },
 
   async fetch() {
@@ -76,7 +72,6 @@ export default {
   },
 
   data() {
-    console.log('new UI')
     const reason = {
       ...REASON,
       ...{ canBeVariable: true },
@@ -393,19 +388,14 @@ export default {
       </SortableTable>
     </SimpleBox>
 
-    <Tabbed class="mt-30">
-      <Tab name="metrics" :label="t('harvester.homePage.sections.metrics.label')" :weight="1">
-        <template #default="props">
-          <DashboardMetrics
-            v-if="props.active"
-            :detail-url="CLUSTER_METRICS_DETAIL_URL"
-            :summary-url="CLUSTER_METRICS_SUMMARY_URL"
-            graph-height="825px"
-            :hasSumarryAndDetail="false"
-          />
-        </template>
-      </Tab>
-    </Tabbed>
+    <SimpleBox class="events" :title="t('harvester.homePage.sections.metrics.label')">
+      <HarvesterMetrics
+        :detail-url="CLUSTER_METRICS_DETAIL_URL"
+        :summary-url="CLUSTER_METRICS_SUMMARY_URL"
+        graph-height="825px"
+        :has-sumarry-and-detail="false"
+      />
+    </SimpleBox>
   </section>
 </template>
 

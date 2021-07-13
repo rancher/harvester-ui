@@ -22,6 +22,10 @@ export default {
       type:     String,
       required: true
     },
+    hasSumarryAndDetail: {
+      type:    Boolean,
+      default: true,
+    },
   },
   data() {
     return {
@@ -45,7 +49,7 @@ export default {
 <template>
   <div class="dashboard-metrics">
     <div class="graph-options mb-10">
-      <DashboardOptions v-model="graphOptions" />
+      <DashboardOptions v-model="graphOptions" :has-sumarry-and-detail="hasSumarryAndDetail" />
     </div>
     <div class="info">
       <slot />
@@ -80,7 +84,7 @@ export default {
   & ::v-deep {
     .external-link {
       position: absolute;
-      left: 200px;
+      left: 0px;
       top: -45px;
     }
 
