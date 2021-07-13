@@ -16,7 +16,7 @@ import Migration from './tabs/migration';
 import Events from './tabs/events/';
 
 const CLUSTER_METRICS_DETAIL_URL = '/api/v1/namespaces/harvester-monitoring/services/http:monitoring-grafana:80/proxy/d/HV_1uZwWk/vm-info-detail?orgId=1';
-const CLUSTER_METRICS_SUMMARY_URL = '/api/v1/namespaces/harvester-monitoring/services/http:monitoring-grafana:80/proxy/d/V3EJMiinz/vm-dashboard?orgId=1';
+const CLUSTER_METRICS_SUMMARY_URL = '/api/v1/namespaces/harvester-monitoring/services/http:monitoring-grafana:80/proxy/d/V3EJMiinz/vm-info-detail?orgId=1';
 
 export default {
   name: 'VMIDetailsPage',
@@ -89,7 +89,7 @@ export default {
     graphVars() {
       return {
         namespace: this.value.namespace,
-        pod:       this.value.name
+        vm:        this.value.name
       };
     },
   },
@@ -144,6 +144,8 @@ export default {
             :detail-url="CLUSTER_METRICS_DETAIL_URL"
             :summary-url="CLUSTER_METRICS_SUMMARY_URL"
             graph-height="550px"
+            :hasSumarryAndDetail="false"
+            :vars="graphVars"
           />
         </template>
       </Tab>

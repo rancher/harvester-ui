@@ -21,7 +21,11 @@ export default {
     graphHeight: {
       type:     String,
       required: true
-    }
+    },
+    hasSumarryAndDetail: {
+      type:    Boolean,
+      default: true,
+    },
   },
   data() {
     return {
@@ -45,7 +49,7 @@ export default {
 <template>
   <div class="dashboard-metrics">
     <div class="graph-options mb-10">
-      <DashboardOptions v-model="graphOptions" />
+      <DashboardOptions v-model="graphOptions" :hasSumarryAndDetail="hasSumarryAndDetail"/>
     </div>
     <div class="info">
       <slot />

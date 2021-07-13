@@ -44,7 +44,7 @@ const RESOURCES = [{
   visitResource: 'host'
 }, { type: HCI.VM }, { type: HCI.NETWORK_ATTACHMENT }, { type: HCI.IMAGE }, { type: HCI.DATA_VOLUME }];
 
-const CLUSTER_METRICS_DETAIL_URL = '/api/v1/namespaces/harvester-monitoring/services/http:monitoring-grafana:80/proxy/d/HV_1uZwWk/vm-info-detail?orgId=1';
+const CLUSTER_METRICS_DETAIL_URL = '/api/v1/namespaces/harvester-monitoring/services/http:monitoring-grafana:80/proxy/d/HV_1uZwWk/vm-dashboard?orgId=1';
 const CLUSTER_METRICS_SUMMARY_URL = '/api/v1/namespaces/harvester-monitoring/services/http:monitoring-grafana:80/proxy/d/V3EJMiinz/vm-dashboard?orgId=1';
 
 export default {
@@ -401,6 +401,7 @@ export default {
             :detail-url="CLUSTER_METRICS_DETAIL_URL"
             :summary-url="CLUSTER_METRICS_SUMMARY_URL"
             graph-height="825px"
+            :hasSumarryAndDetail="false"
           />
         </template>
       </Tab>
